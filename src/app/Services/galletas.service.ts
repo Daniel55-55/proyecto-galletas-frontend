@@ -11,4 +11,8 @@ export class GalletasService {
   obtener(tipo: 'chocolate' | 'vainilla'): Observable<any[]> {
     return this.http.get<any[]>(`${this.api}/galletas-${tipo}`);
   }
+
+  crear(tipo: 'chocolate' | 'vainilla', galleta: any): Observable<any> {
+    return this.http.post<any>(`${this.api}/galletas-${tipo}`, galleta);
+  }
 }
