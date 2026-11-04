@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class GalletasService {
-  private api = 'http://localhost:3000/api/v1';
+  private api = 'https://proyecto-galletas-backend-ap3b.vercel.app/api/v1';
 
   constructor(private http: HttpClient) {}
 
