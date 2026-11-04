@@ -1,3 +1,20 @@
 import { Routes } from '@angular/router';
 
-export const routes: Routes = [];
+import { GalletasChocolate } from './vistas/galletas-chocolate/galletas-chocolate';
+import { GalletasVainilla } from './vistas/galletas-vainilla/galletas-vainilla';
+
+export const routes: Routes = [
+  {
+    path: '',
+    redirectTo: 'galletas-chocolate',
+    pathMatch: 'full'
+  },
+  {
+    path: 'galletas-chocolate',
+    component: GalletasChocolate
+  },
+  {
+    path: 'galletas-vainilla',
+    component: GalletasVainilla
+  }
+];
