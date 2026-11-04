@@ -1,2 +1,6 @@
 <h2>Galletas de Vainilla</h2>
-<app-tabla-galletas [dataSource]="galletas"></app-tabla-galletas>
+<app-tabla-galletas 
+  [dataSource]="galletas" 
+  tipo="vainilla" 
+  (recargarDatos)="ngOnInit()">
+</app-tabla-galletas>
