@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 
-import { authGuard } from './guards/seguridad.guard';
+import { authGuard } from './guards/auth.guard';
 import { Login } from './vistas/login/login';
 import { Registro } from './vistas/registro/registro';
 import { GalletasChocolate } from './vistas/galletas-chocolate/galletas-chocolate';
