@@ -1,7 +1,9 @@
 <mat-toolbar color="primary" class="mat-elevation-z4">
-  <button mat-icon-button [matMenuTriggerFor]="menu">
-    <mat-icon>menu</mat-icon>
-  </button>
+  @if (estaLogueado()) {
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+  }
   <span>Desarrollo Basado en Plataformas - Proyecto de Angular</span>
 </mat-toolbar>
 
@@ -14,9 +16,9 @@
     <mat-icon>bakery_dining</mat-icon>
     <span>Galletas de Vainilla</span>
   </button>
-    <button mat-menu-item routerLink="/login">
-    <mat-icon>login</mat-icon>
-    <span>Iniciar sesión</span>
+  <button mat-menu-item (click)="cerrarSesion()">
+    <mat-icon>logout</mat-icon>
+    <span>Cerrar sesión</span>
   </button>
 </mat-menu>
 
