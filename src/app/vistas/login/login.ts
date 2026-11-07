@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -13,6 +13,7 @@ import { LoginService } from '../../Services/login.service';
   standalone: true,
   imports: [
     ReactiveFormsModule,
+    RouterLink,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
@@ -36,6 +37,10 @@ export class Login {
       usuario: ['', Validators.required],
       contrasena: ['', Validators.required]
     });
+
+    if (this.loginService.estaLogueado()) {
+      this.router.navigate(['/galletas-chocolate']);
+    }
   }
 
   ingresar() {
@@ -51,8 +56,8 @@ export class Login {
     this.loginService.login(usuario, contrasena).subscribe({
       next: (respuesta) => {
         this.cargando = false;
-        localStorage.setItem('usuario', usuario);
-        this.router.navigate(['/']);
+        this.loginService.guardarSesion(respuesta.usuario);
+        this.router.navigate(['/galletas-chocolate']);
       },
       error: (error) => {
         this.cargando = false;
