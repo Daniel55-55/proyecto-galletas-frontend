@@ -1,0 +1,25 @@
+.login-contenedor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+}
+
+.login-tarjeta {
+  width: 100%;
+  max-width: 380px;
+  padding: 16px;
+}
+
+.login-formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.login-error {
+  color: #d32f2f;
+  margin: 0;
+  font-size: 14px;
+}
