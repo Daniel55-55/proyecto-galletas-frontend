@@ -23,3 +23,10 @@
   margin: 0;
   font-size: 14px;
 }
+
+.login-acciones {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
