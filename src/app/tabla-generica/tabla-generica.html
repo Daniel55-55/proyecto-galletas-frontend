@@ -1,0 +1,14 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 tabla-generica">
+
+  <ng-container *ngFor="let columna of displayedColumns" [matColumnDef]="columna">
+    <th mat-header-cell *matHeaderCellDef>
+      {{ titulos[columna] || (columna | titlecase) }}
+    </th>
+    <td mat-cell *matCellDef="let fila">
+      {{ monedas.includes(columna) ? '$' : '' }}{{ fila[columna] }}
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let fila; columns: displayedColumns;"></tr>
+</table>
