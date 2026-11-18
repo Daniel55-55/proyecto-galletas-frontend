@@ -6,28 +6,24 @@
     </mat-card-header>
 
     <mat-card-content>
-      <form [formGroup]="formulario" (ngSubmit)="ingresar()" class="login-formulario">
+      <form (ngSubmit)="ingresar()" class="login-formulario">
         <mat-form-field appearance="outline">
           <mat-label>Usuario</mat-label>
           <mat-icon matPrefix>person</mat-icon>
-          <input matInput formControlName="usuario" autocomplete="username">
-          <mat-error>El usuario es obligatorio</mat-error>
+          <input matInput name="usuario" [(ngModel)]="usuario">
         </mat-form-field>
 
         <mat-form-field appearance="outline">
           <mat-label>Contraseña</mat-label>
           <mat-icon matPrefix>lock</mat-icon>
-          <input matInput type="password" formControlName="contrasena" autocomplete="current-password">
-          <mat-error>La contraseña es obligatoria</mat-error>
+          <input matInput type="password" name="contrasena" [(ngModel)]="contrasena">
         </mat-form-field>
 
         @if (mensajeError) {
           <p class="login-error">{{ mensajeError }}</p>
         }
 
-        <button mat-raised-button color="primary" type="submit" [disabled]="formulario.invalid || cargando">
-          Ingresar
-        </button>
+        <button mat-raised-button color="primary" type="submit">Ingresar</button>
       </form>
     </mat-card-content>
 
