@@ -1,18 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class LoginService {
-  private api = 'https://proyecto-galletas-backend-ap3b.vercel.app/api/v1';
+  api = 'https://proyecto-galletas-backend-ap3b.vercel.app/api/v1';
 
   constructor(private http: HttpClient) {}
 
-  login(usuario: string, contrasena: string): Observable<any> {
+  login(usuario: string, contrasena: string) {
     return this.http.post<any>(`${this.api}/login`, { usuario, contrasena });
   }
 
-  registrar(usuario: string, contrasena: string): Observable<any> {
+  registrar(usuario: string, contrasena: string) {
     return this.http.post<any>(`${this.api}/registro`, { usuario, contrasena });
   }
 
@@ -20,8 +19,8 @@ export class LoginService {
     localStorage.setItem('usuario', usuario);
   }
 
-  estaLogueado(): boolean {
-    return !!localStorage.getItem('usuario');
+  estaLogueado() {
+    return localStorage.getItem('usuario') !== null;
   }
 
   cerrarSesion() {
