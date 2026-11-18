@@ -11,10 +11,9 @@ import { MatTableModule } from '@angular/material/table';
 })
 export class TablaGenerica implements OnChanges {
   @Input() dataSource: any[] = [];
-  @Input() displayedColumns: string[] = [];
+  displayedColumns: string[] = [];
+
   ngOnChanges() {
-    if (this.displayedColumns.length === 0 && this.dataSource.length > 0) {
-      this.displayedColumns = Object.keys(this.dataSource[0]);
-    }
+    this.displayedColumns = this.dataSource.length > 0 ? Object.keys(this.dataSource[0]) : [];
   }
 }
