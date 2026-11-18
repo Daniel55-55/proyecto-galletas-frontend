@@ -13,11 +13,6 @@ import { GalletasService } from '../../Services/galletas.service';
 export class GalletasTodas implements OnInit {
   galletas: any[] = [];
 
-  // Las columnas se definen por llaves (así se llaman en la base de datos)
-  columnas: string[] = ['id', 'nombre', 'tamano', 'precio', 'cantidad', 'tipo'];
-  titulos: { [llave: string]: string } = { tamano: 'Tamaño' };
-  monedas: string[] = ['precio'];
-
   constructor(private galletasService: GalletasService) {}
 
   ngOnInit() {
