@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -12,7 +12,7 @@ import { LoginService } from '../../Services/login.service';
   selector: 'app-login',
   standalone: true,
   imports: [
-    ReactiveFormsModule,
+    FormsModule,
     RouterLink,
     MatCardModule,
     MatFormFieldModule,
@@ -24,43 +24,28 @@ import { LoginService } from '../../Services/login.service';
   styleUrl: './login.css'
 })
 export class Login {
-  formulario: FormGroup;
+  usuario = '';
+  contrasena = '';
   mensajeError = '';
-  cargando = false;
 
-  constructor(
-    private fb: FormBuilder,
-    private loginService: LoginService,
-    private router: Router
-  ) {
-    this.formulario = this.fb.group({
-      usuario: ['', Validators.required],
-      contrasena: ['', Validators.required]
-    });
-
+  constructor(private loginService: LoginService, private router: Router) {
     if (this.loginService.estaLogueado()) {
-      this.router.navigate(['/galletas-chocolate']);
+      this.router.navigate(['/galletas-todas']);
     }
   }
 
   ingresar() {
-    if (this.formulario.invalid) {
+    if (!this.usuario.trim() || !this.contrasena) {
+      this.mensajeError = 'Escribe tu usuario y tu contraseña';
       return;
     }
 
-    this.cargando = true;
-    this.mensajeError = '';
-
-    const { usuario, contrasena } = this.formulario.value;
-
-    this.loginService.login(usuario, contrasena).subscribe({
+    this.loginService.login(this.usuario, this.contrasena).subscribe({
       next: (respuesta) => {
-        this.cargando = false;
         this.loginService.guardarSesion(respuesta.usuario);
-        this.router.navigate(['/galletas-chocolate']);
+        this.router.navigate(['/galletas-todas']);
       },
       error: (error) => {
-        this.cargando = false;
         this.mensajeError =
           error.status === 401
             ? 'Usuario o contraseña incorrectos'
