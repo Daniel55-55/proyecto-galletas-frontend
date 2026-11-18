@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -13,7 +13,7 @@ import { LoginService } from '../../Services/login.service';
   selector: 'app-registro',
   standalone: true,
   imports: [
-    ReactiveFormsModule,
+    FormsModule,
     RouterLink,
     MatCardModule,
     MatFormFieldModule,
@@ -25,40 +25,40 @@ import { LoginService } from '../../Services/login.service';
   styleUrl: '../login/login.css'
 })
 export class Registro {
-  formulario: FormGroup;
+  usuario = '';
+  contrasena = '';
   mensajeError = '';
-  cargando = false;
 
   constructor(
-    private fb: FormBuilder,
     private loginService: LoginService,
     private router: Router,
     private snackBar: MatSnackBar
-  ) {
-    this.formulario = this.fb.group({
-      usuario: ['', Validators.required],
-      contrasena: ['', [Validators.required, Validators.minLength(6)]]
-    });
-  }
+  ) {}
 
   registrar() {
-    if (this.formulario.invalid) {
+    if (this.usuario.trim().length < 4) {
+      this.mensajeError = 'El usuario debe tener mínimo 4 caracteres';
+      return;
+    }
+    if (this.usuario.includes(' ')) {
+      this.mensajeError = 'El usuario no puede tener espacios';
+      return;
+    }
+    if (this.contrasena.length < 6) {
+      this.mensajeError = 'La contraseña debe tener mínimo 6 caracteres';
+      return;
+    }
+    if (!/[a-zA-Z]/.test(this.contrasena) || !/[0-9]/.test(this.contrasena)) {
+      this.mensajeError = 'La contraseña debe tener al menos una letra y un número';
       return;
     }
 
-    this.cargando = true;
-    this.mensajeError = '';
-
-    const { usuario, contrasena } = this.formulario.value;
-
-    this.loginService.registrar(usuario, contrasena).subscribe({
+    this.loginService.registrar(this.usuario, this.contrasena).subscribe({
       next: () => {
-        this.cargando = false;
         this.snackBar.open('Usuario registrado. Ahora inicia sesión', 'Cerrar', { duration: 4000 });
         this.router.navigate(['/login']);
       },
       error: (error) => {
-        this.cargando = false;
         this.mensajeError = error.error?.message ?? 'No se pudo conectar con el servidor';
       }
     });
