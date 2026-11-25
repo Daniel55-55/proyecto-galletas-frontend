@@ -35,8 +35,9 @@ export class Login {
   }
 
   ingresar() {
+    this.mensajeError = '';
+
     if (!this.usuario.trim() || !this.contrasena) {
-      this.mensajeError = 'Escribe tu usuario y tu contraseña';
       return;
     }
 
