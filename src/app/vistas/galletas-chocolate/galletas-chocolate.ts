@@ -15,6 +15,10 @@ export class GalletasChocolate implements OnInit {
   constructor(private galletasService: GalletasService) {}
 
   ngOnInit() {
+    this.cargar();
+  }
+
+  cargar() {
     this.galletasService.obtener('chocolate').subscribe((data) => {
       this.galletas = data;
     });
