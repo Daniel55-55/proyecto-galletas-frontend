@@ -1,31 +1,26 @@
-.login-contenedor {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 80vh;
+.letrero-fiesta .mdc-snackbar__surface {
+  background: linear-gradient(135deg, #6a1b9a, #d81b60, #ff8f00) !important;
+  padding: 18px 26px !important;
+  border-radius: 14px !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35) !important;
+  animation: reboteFiesta 0.5s ease;
 }
 
-.login-tarjeta {
-  width: 100%;
-  max-width: 400px;
-  padding: 16px;
+.letrero-fiesta .mdc-snackbar__label {
+  font-size: 22px !important;
+  font-weight: bold !important;
+  color: #ffffff !important;
+  text-align: center;
 }
 
-.login-formulario {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-top: 16px;
+.letrero-fiesta .mat-mdc-snack-bar-action {
+  color: #ffeb3b !important;
+  font-size: 16px !important;
+  font-weight: bold !important;
 }
 
-.login-error {
-  color: #d32f2f;
-  font-size: 14px;
-  margin: 0;
-}
-
-.login-acciones {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+@keyframes reboteFiesta {
+  0% { transform: scale(0.7); }
+  70% { transform: scale(1.06); }
+  100% { transform: scale(1); }
 }
