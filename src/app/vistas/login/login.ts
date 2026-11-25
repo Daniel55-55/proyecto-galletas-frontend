@@ -47,10 +47,15 @@ export class Login {
     this.loginService.login(this.usuario, this.contrasena).subscribe({
       next: (respuesta) => {
         this.loginService.guardarSesion(respuesta.usuario);
-        this.snackBar.open('Bienvenido al inventario de galletas', 'Cerrar', {
-          duration: 3000,
-          verticalPosition: 'top'
-        });
+        this.snackBar.open(
+          '🎺🎊🎉 ¡Bienvenido al inventario de galletas! 🎉🎊🎺',
+          'Cerrar',
+          {
+            duration: 4500,
+            verticalPosition: 'top',
+            panelClass: ['letrero-fiesta']
+          }
+        );
         this.router.navigate(['/galletas-todas']);
       },
       error: () => {
