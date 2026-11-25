@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, Input, OnChanges, ViewChild } from '@angular/core';
 import { NgFor, TitleCasePipe } from '@angular/common';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -10,19 +10,19 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
   templateUrl: './tabla-generica.html',
   styleUrl: './tabla-generica.css'
 })
-export class TablaGenerica implements OnChanges, AfterViewInit {
+export class TablaGenerica implements OnChanges {
   @Input() dataSource: any[] = [];
   displayedColumns: string[] = [];
   datosPaginados = new MatTableDataSource<any>([]);
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatPaginator) set paginator(pager: MatPaginator) {
+    if (pager) {
+      this.datosPaginados.paginator = pager;
+    }
+  }
 
   ngOnChanges() {
     this.displayedColumns = this.dataSource.length > 0 ? Object.keys(this.dataSource[0]) : [];
     this.datosPaginados.data = this.dataSource;
-  }
-
-  ngAfterViewInit() {
-    this.datosPaginados.paginator = this.paginator;
   }
 }
