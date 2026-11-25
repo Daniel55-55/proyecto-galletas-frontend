@@ -6,17 +6,34 @@
     </mat-card-header>
 
     <mat-card-content>
-      <form (ngSubmit)="ingresar()" class="login-formulario">
+      <form #formLogin="ngForm" (ngSubmit)="ingresar()" class="login-formulario">
         <mat-form-field appearance="outline">
           <mat-label>Usuario</mat-label>
           <mat-icon matPrefix>person</mat-icon>
-          <input matInput name="usuario" [(ngModel)]="usuario">
+          <input
+            matInput
+            name="usuario"
+            [(ngModel)]="usuario"
+            #campoUsuario="ngModel"
+            required>
+          @if (campoUsuario.invalid && (campoUsuario.touched || formLogin.submitted)) {
+            <mat-error>El usuario es obligatorio</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field appearance="outline">
           <mat-label>Contraseña</mat-label>
           <mat-icon matPrefix>lock</mat-icon>
-          <input matInput type="password" name="contrasena" [(ngModel)]="contrasena">
+          <input
+            matInput
+            type="password"
+            name="contrasena"
+            [(ngModel)]="contrasena"
+            #campoContrasena="ngModel"
+            required>
+          @if (campoContrasena.invalid && (campoContrasena.touched || formLogin.submitted)) {
+            <mat-error>La contraseña es obligatoria</mat-error>
+          }
         </mat-form-field>
 
         @if (mensajeError) {
