@@ -18,5 +18,9 @@ export class GalletasVainilla implements OnInit {
     this.galletasService.obtener('vainilla').subscribe((data) => {
       this.galletas = data;
     });
+  cargar() {
+    this.galletasService.obtener('chocolate').subscribe((data) => {
+      this.galletas = data;
+    });
   }
 }
